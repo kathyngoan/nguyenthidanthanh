@@ -2,9 +2,9 @@ import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="header w-full">
-      <div className="navbar">
-        <nav className="bg-gray-800 p-4 flex gap-6 justify-center">
+    <header className="header">
+      <div className="bg-gray-800 justify-center">
+        <nav className="navbar container px-4">
           <NavLink
             to="/"
             className={({ isActive }) =>

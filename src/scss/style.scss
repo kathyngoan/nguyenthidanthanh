@@ -1,4 +1,17 @@
 $header-height-pc: 60px;
+header {
+    .navbar {
+        height: $header-height-pc;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        a {
+            padding: 0 30px;
+        }
+    }
+}
 main {
     min-height: calc(100vh - $header-height-pc) ;
+    padding: 30px;
 }
