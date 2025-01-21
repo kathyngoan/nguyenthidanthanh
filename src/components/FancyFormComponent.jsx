@@ -64,7 +64,6 @@ const FancyFormComponent = () => {
   const handleAmountChange = (e) => {
     const value = e.target.value;
 
-
     if (isNaN(value) || value === "") {
       setError("Invalid input. Please enter a numeric value.");
       setAmountToSend("");
@@ -74,8 +73,6 @@ const FancyFormComponent = () => {
 
     setAmountToSend(value);
     setError(null);
-
-
 
     if (selectedToken && prices[selectedToken]) {
       const price = prices[selectedToken];
@@ -92,7 +89,6 @@ const FancyFormComponent = () => {
       setError("Price data is unavailable for the selected token.");
     }
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -135,7 +131,10 @@ const FancyFormComponent = () => {
         )}
 
         <div className="flex flex-col">
-          <label htmlFor="input-token" className="text-gray-700 font-medium mb-1">
+          <label
+            htmlFor="input-token"
+            className="text-gray-700 font-medium mb-1"
+          >
             Select Token
           </label>
           <Select
@@ -149,7 +148,10 @@ const FancyFormComponent = () => {
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="input-amount" className="text-gray-700 font-medium mb-1">
+          <label
+            htmlFor="input-amount"
+            className="text-gray-700 font-medium mb-1"
+          >
             Amount to send
           </label>
           <input
@@ -164,7 +166,10 @@ const FancyFormComponent = () => {
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="output-amount" className="text-gray-700 font-medium mb-1">
+          <label
+            htmlFor="output-amount"
+            className="text-gray-700 font-medium mb-1"
+          >
             Amount to receive
           </label>
           <input
@@ -179,11 +184,13 @@ const FancyFormComponent = () => {
 
         <button
           type="submit"
-          className="w-full py-2 px-4 text-white font-medium rounded-md bg-linear-45 from-indigo-500 via-purple-500 to-pink-500 hover:from-black hover:via-black hover:to-black font-bold"
+          className="w-full py-2 px-4 text-white font-medium rounded-md bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
+  hover:from-black hover:via-black hover:to-black 
+  focus:border-none hover:border-none
+  transition duration-200 font-bold"
         >
           CONFIRM SWAP
         </button>
-
       </form>
 
       {/* Modal */}
@@ -199,11 +206,10 @@ const FancyFormComponent = () => {
             </p>
             <button
               onClick={closeModal}
-              className="py-2 px-4 bg-gray-900 text-white font-medium rounded-md hover:bg-gray-600 focus:outline-none transition duration-200"
+              className="py-2 px-4 bg-gray-900 text-white font-medium rounded-md hover:bg-gray-600 focus:outline-none focus:border-none hover:border-none transition duration-200"
             >
               Close
             </button>
-
           </div>
         </div>
       )}
