@@ -1,5 +1,4 @@
-//import React from "react";
-//import { useParams } from "react-router-dom";
+
 import FancyFormComponent from "@/components/FancyFormComponent";
 
 const FancyPage = () => {

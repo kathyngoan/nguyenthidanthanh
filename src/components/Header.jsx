@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 const Header = () => {
   return (
     <header className="header">
-      <div className="bg-gray-800 justify-center">
-        <nav className="navbar container px-4">
+      <div className="justify-center">
+        <nav className="navbar container px-4 oxanium-font">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -16,6 +16,16 @@ const Header = () => {
             Home
           </NavLink>
           <NavLink
+            to="/WayToSumPage"
+            className={({ isActive }) =>
+              isActive
+                ? "text-blue-300 underline text-lg"
+                : "text-white text-lg hover:text-blue-400"
+            }
+          >
+            Way To Sum
+          </NavLink>
+          <NavLink
             to="/FancyPage"
             className={({ isActive }) =>
               isActive
@@ -23,7 +33,17 @@ const Header = () => {
                 : "text-white text-lg hover:text-blue-400"
             }
           >
-            Fancy Page
+            Fancy Form
+          </NavLink>
+          <NavLink
+            to="/MessyReactPage"
+            className={({ isActive }) =>
+              isActive
+                ? "text-blue-300 underline text-lg"
+                : "text-white text-lg hover:text-blue-400"
+            }
+          >
+           Messy React 
           </NavLink>
         </nav>
       </div>

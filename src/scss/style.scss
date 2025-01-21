@@ -1,4 +1,10 @@
 $header-height-pc: 60px;
+
+body {
+
+    background-image: radial-gradient(circle, rgb(24, 98, 138) 0%, rgb(13, 14, 14) 100%);
+}
+
 header {
     .navbar {
         height: $header-height-pc;
@@ -6,12 +12,66 @@ header {
         display: flex;
         align-items: center;
         justify-content: center;
+
         a {
             padding: 0 30px;
         }
     }
 }
+
+@font-face {
+    font-family: 'Oxanium';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(..//assets/fonts/Oxanium.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(..//assets/fonts/Poppins.woff2) format('woff2');
+}
+
 main {
-    min-height: calc(100vh - $header-height-pc) ;
+    min-height: calc(100vh - $header-height-pc);
     padding: 30px;
+
+    font-family: 'Poppins';
+}
+
+ .title, .oxanium-font {
+    font-family: Oxanium;
+}
+
+.box {
+    border: 1px white solid;
+   &:hover {
+    box-shadow: 0px 0px 20px 5px rgba(71, 203, 247, 0.6);
+   }
+}
+pre {
+    border-radius: 0 !important;
+    background: transparent !important;
+    margin-left: -50px !important;
+}
+
+//scrollbar
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 10px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }

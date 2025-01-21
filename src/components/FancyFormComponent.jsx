@@ -1,140 +1,215 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Select from "react-select";
 
 const FancyFormComponent = () => {
-  const [tokens, setTokens] = useState([]); // Danh sách token
   const [prices, setPrices] = useState({});
-  const [selectedToken, setSelectedToken] = useState("");
+  const [selectedToken, setSelectedToken] = useState(null);
   const [amountToSend, setAmountToSend] = useState("");
   const [amountToReceive, setAmountToReceive] = useState("");
   const [error, setError] = useState(null);
-  const [tokenImages, setTokenImages] = useState({});
+  const [tokenOptions, setTokenOptions] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    // Danh sách token tĩnh
     const staticTokens = [
       { symbol: "SWTH", name: "Switcheo" },
       { symbol: "BTC", name: "Bitcoin" },
       { symbol: "ETH", name: "Ethereum" },
       { symbol: "USDT", name: "Tether" },
     ];
-    setTokens(staticTokens);
 
-    // Tải ảnh token
-    const fetchTokenImages = async () => {
-      const images = {};
-      for (const token of staticTokens) {
-        const imageUrl = `https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/${token.symbol}.svg`;
-        images[token.symbol] = imageUrl;
-      }
-      setTokenImages(images);
-    };
+    const options = staticTokens.map((token) => ({
+      value: token.symbol,
+      label: (
+        <div className="flex items-center space-x-2">
+          <img
+            src={`https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/${token.symbol}.svg`}
+            alt={`${token.symbol} logo`}
+            className="w-6 h-6"
+          />
+          <span>
+            {token.name} ({token.symbol})
+          </span>
+        </div>
+      ),
+    }));
 
-    fetchTokenImages();
+    setTokenOptions(options);
 
-    // Lấy giá từ API
     const fetchPrices = async () => {
       try {
-        const { data } = await axios.get("https://interview.switcheo.com/prices.json");
+        const { data } = await axios.get(
+          "https://interview.switcheo.com/prices.json"
+        );
         const processedPrices = data.reduce((acc, item) => {
           acc[item.currency] = item.price;
           return acc;
         }, {});
         setPrices(processedPrices);
       } catch (err) {
-        setError("Unable to fetch token price data. Please try again later.");
+        setError(`Unable to fetch token price data. Reason: ${err.message}`);
       }
     };
 
     fetchPrices();
   }, []);
 
-  const handleTokenChange = (e) => {
-    setSelectedToken(e.target.value);
-    setAmountToReceive("");
-    setError(null);
+  const handleTokenChange = (selectedOption) => {
+    setSelectedToken(selectedOption?.value || null); // Reset if no token is selected
+    setAmountToReceive(""); // Reset calculated value
+    setError(null); // Clear error
   };
 
   const handleAmountChange = (e) => {
     const value = e.target.value;
-    if (!isNaN(value)) {
-      setAmountToSend(value);
-      if (selectedToken && prices[selectedToken]) {
-        const price = prices[selectedToken];
-        setAmountToReceive((value * price).toFixed(4));
+
+
+    if (isNaN(value) || value === "") {
+      setError("Invalid input. Please enter a numeric value.");
+      setAmountToSend("");
+      setAmountToReceive("");
+      return;
+    }
+
+    setAmountToSend(value); 
+    setError(null); 
+
+
+
+    if (selectedToken && prices[selectedToken]) {
+      const price = prices[selectedToken];
+
+      if (price) {
+        const calculatedAmount = (value * price).toFixed(4); 
+        setAmountToReceive(calculatedAmount);
       } else {
-        setError("Price data is unavailable for the selected token.");
         setAmountToReceive("");
+        setError("Price data is unavailable for the selected token.");
       }
     } else {
-      setError("Invalid input. Please enter a numeric value.");
+      setAmountToReceive("");
+      setError("Price data is unavailable for the selected token.");
     }
   };
 
-  // Xử lý Submit
+
   const handleSubmit = (e) => {
-    e.preventDefault(); // Ngừng việc reload trang khi submit
-    if (selectedToken && amountToSend && !error) {
-      alert(`Swap confirmed!\nSending ${amountToSend} ${selectedToken}\nReceiving ${amountToReceive} in total.`);
-    } else {
-      setError("Please make sure all fields are filled correctly.");
+    e.preventDefault();
+
+    // Check if all fields are properly filled
+    if (!selectedToken) {
+      setError("Please select a token.");
+      return;
     }
+
+    if (!amountToSend || isNaN(amountToSend) || parseFloat(amountToSend) <= 0) {
+      setError("Please enter a valid amount to send.");
+      return;
+    }
+
+    if (!amountToReceive || amountToReceive === "" || isNaN(amountToReceive)) {
+      setError("Amount to receive could not be calculated.");
+      return;
+    }
+
+    // All checks passed, show the modal
+    setIsModalOpen(true);
   };
+
+  const closeModal = () => setIsModalOpen(false);
 
   return (
-    <form className="swap-form" onSubmit={handleSubmit}>
-      <h5>Swap</h5>
-
-      {error && <div className="error-message">{error}</div>}
-
-      <label htmlFor="input-token">Select Token</label>
-      <select
-        id="input-token"
-        value={selectedToken}
-        onChange={handleTokenChange}
-        required
+    <div className="relative max-w-lg mx-auto mt-10">
+      <form
+        className="p-6 bg-white rounded-lg space-y-4"
+        onSubmit={handleSubmit}
+         data-aos="fade-in"
       >
-        <option value="">Select a Token</option>
-        {tokens.map((token) => (
-          <option key={token.symbol} value={token.symbol}>
-            {token.name} ({token.symbol})
-          </option>
-        ))}
-      </select>
+        <h5 className="text-2xl font-semibold text-gray-800 title">Swap</h5>
 
-      <div>
-        {selectedToken && tokenImages[selectedToken] && (
-          <img
-            src={tokenImages[selectedToken]}
-            alt={`${selectedToken} logo`}
-            className="token-image"
-            width={50}
-            height={50}
-          />
+        {error && (
+          <div className="text-red-500 text-sm mb-4" role="alert">
+            {error}
+          </div>
         )}
-      </div>
 
-      <label htmlFor="input-amount">Amount to send</label>
-      <input
-        id="input-amount"
-        type="text"
-        value={amountToSend}
-        onChange={handleAmountChange}
-        placeholder="Enter amount to send"
-        required
-      />
+        <div className="flex flex-col">
+          <label htmlFor="input-token" className="text-gray-700 font-medium mb-1">
+            Select Token
+          </label>
+          <Select
+            id="input-token"
+            options={tokenOptions}
+            onChange={handleTokenChange}
+            className="w-full border rounded-md"
+            placeholder="Select a Token"
+            isClearable
+          />
+        </div>
 
-      <label htmlFor="output-amount">Amount to receive</label>
-      <input
-        id="output-amount"
-        type="text"
-        value={amountToReceive}
-        readOnly
-        placeholder="Calculated amount to receive"
-      />
+        <div className="flex flex-col">
+          <label htmlFor="input-amount" className="text-gray-700 font-medium mb-1">
+            Amount to send
+          </label>
+          <input
+            id="input-amount"
+            type="text"
+            value={amountToSend}
+            onChange={handleAmountChange}
+            placeholder="Enter amount to send"
+            className="p-2 border rounded-md"
+            required
+          />
+        </div>
 
-      <button type="submit">CONFIRM SWAP</button>
-    </form>
+        <div className="flex flex-col">
+          <label htmlFor="output-amount" className="text-gray-700 font-medium mb-1">
+            Amount to receive
+          </label>
+          <input
+            id="output-amount"
+            type="text"
+            value={amountToReceive}
+            readOnly
+            placeholder="Calculated amount to receive"
+            className="p-2 border bg-gray-100 rounded-md"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="w-full py-2 px-4 text-white font-medium rounded-md hover:bg-black transition duration-200 bold"
+          style={{
+            backgroundImage: 'linear-gradient(94deg, rgba(169, 62, 255, 1), rgba(94, 64, 222, 1) 51%, rgba(0, 179, 255, 1))',
+          }}
+        >
+          CONFIRM SWAP
+        </button>
+
+      </form>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
+          <div className="bg-white rounded-lg shadow-lg w-96 p-6 space-y-4 text-center">
+            <h3 className="text-xl font-semibold uppercase">Swap Confirmed</h3>
+            <p>
+              Sending: <strong>{amountToSend}</strong> {selectedToken}
+            </p>
+            <p>
+              Receiving: <strong>{amountToReceive}</strong>
+            </p>
+            <button
+              onClick={closeModal}
+              className="py-2 px-4 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-600 transition duration-200"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
