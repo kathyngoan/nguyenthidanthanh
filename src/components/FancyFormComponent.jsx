@@ -72,8 +72,8 @@ const FancyFormComponent = () => {
       return;
     }
 
-    setAmountToSend(value); 
-    setError(null); 
+    setAmountToSend(value);
+    setError(null);
 
 
 
@@ -81,7 +81,7 @@ const FancyFormComponent = () => {
       const price = prices[selectedToken];
 
       if (price) {
-        const calculatedAmount = (value * price).toFixed(4); 
+        const calculatedAmount = (value * price).toFixed(4);
         setAmountToReceive(calculatedAmount);
       } else {
         setAmountToReceive("");
@@ -124,7 +124,7 @@ const FancyFormComponent = () => {
       <form
         className="p-6 bg-white rounded-lg space-y-4"
         onSubmit={handleSubmit}
-         data-aos="fade-in"
+        data-aos="fade-in"
       >
         <h5 className="text-2xl font-semibold text-gray-800 title">Swap</h5>
 
@@ -179,10 +179,7 @@ const FancyFormComponent = () => {
 
         <button
           type="submit"
-          className="w-full py-2 px-4 text-white font-medium rounded-md hover:bg-black transition duration-200 bold"
-          style={{
-            backgroundImage: 'linear-gradient(94deg, rgba(169, 62, 255, 1), rgba(94, 64, 222, 1) 51%, rgba(0, 179, 255, 1))',
-          }}
+          className="w-full py-2 px-4 text-white font-medium rounded-md bg-linear-45 from-indigo-500 via-purple-500 to-pink-500 hover:from-black hover:via-black hover:to-black font-bold"
         >
           CONFIRM SWAP
         </button>
@@ -202,10 +199,11 @@ const FancyFormComponent = () => {
             </p>
             <button
               onClick={closeModal}
-              className="py-2 px-4 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-600 transition duration-200"
+              className="py-2 px-4 bg-gray-900 text-white font-medium rounded-md hover:bg-gray-600 focus:outline-none transition duration-200"
             >
               Close
             </button>
+
           </div>
         </div>
       )}

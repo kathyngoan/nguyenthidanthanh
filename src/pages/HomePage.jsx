@@ -28,6 +28,7 @@ const HomePage = () => {
           <h1 className="text-4xl font-bold mb-10 text-orange-300" data-aos="fade-in">Welcome to My Test</h1>
           <div className="uppercase" data-aos="fade-in" ><span className="inline-flex w-[100px]"data-aos-delay="300">Full Name : </span>Nguyen Thi Dan Thanh</div>
           <div data-aos="fade-in" data-aos-delay="600" ><span className="inline-flex w-[100px]">Position : </span>Front End Developer</div>
+          <div data-aos="fade-in" data-aos-delay="600" ><span className="inline-flex w-[100px]">Email : </span>kathyngoan@gmail.com</div>
         </div>
         <div className="grid grid-cols-1 gap-8">
           {boxes.map((box, index) => (
