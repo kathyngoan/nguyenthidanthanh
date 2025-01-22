@@ -89,7 +89,7 @@ const CodeBlockThreeAskComponent = () => {
 
   return (
     <div>
-      <div className="max-w-3xl mx-auto p-6">
+      <div className="md:max-w-3xl mx-auto md:p-6">
         <h1 className="text-3xl font-semibold mb-4">Task</h1>
         <p className="text-lg mb-4">
           List out the computational inefficiencies and anti-patterns found in
@@ -97,7 +97,7 @@ const CodeBlockThreeAskComponent = () => {
         </p>
 
         <div className="text-white">
-          <h1 className="uppercase text-orange-300">
+          <h1 className="uppercase text-orange-300 text-xl sm:text-4xl">
             Code Instructions
           </h1>
 

@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
@@ -27,7 +27,7 @@ const HomePage = () => {
     <div className="text-white py-10">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:px-16 px-5 items-center">
         <div>
-          <h1 className="text-4xl font-bold mb-10 text-orange-300">Welcome to My Test</h1>
+          <h1 className="text-2xl sm:text-4xl font-bold mb-10 text-orange-300">Welcome to My Test</h1>
           <div className="uppercase"><span className="inline-flex w-[100px]">Full Name : </span>Nguyen Thi Dan Thanh</div>
           <div><span className="inline-flex w-[100px]">Position : </span>Front End Developer</div>
           <div><span className="inline-flex w-[100px]">Email : </span>kathyngoan@gmail.com</div>

@@ -14,7 +14,12 @@ header {
         justify-content: center;
 
         a {
-            padding: 0 30px;
+            @media (min-width: 768px) {
+                padding: 0 30px;
+            }
+            @media (max-width: 767px) {
+                padding: 0 10px;
+            }
         }
     }
 }
@@ -37,7 +42,12 @@ header {
 
 main {
     min-height: calc(100vh - $header-height-pc);
-    padding: 30px;
+    @media (min-width: 768px) {
+        padding: 30px;
+    }
+    @media (max-width: 767px) {
+        padding: 15px;
+    }
 
     font-family: 'Poppins';
 }
@@ -55,7 +65,10 @@ main {
 pre {
     border-radius: 0 !important;
     background: transparent !important;
-    margin-left: -50px !important;
+    margin-left: -40px !important;
+    @media (max-width: 767px) {
+       max-width: 95vw;;
+    }
 }
 
 //scrollbar

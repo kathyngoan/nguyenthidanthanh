@@ -4,13 +4,13 @@ const Header = () => {
   return (
     <header className="header">
       <div className="justify-center">
-        <nav className="navbar container px-4 oxanium-font">
+        <nav className="navbar container sm:px-4 oxanium-font">
           <NavLink
             to="/"
             className={({ isActive }) =>
               isActive
-                ? "text-blue-300 underline text-lg"
-                : "text-white text-lg hover:text-blue-400"
+                ? "text-blue-300 underline text-sm sm:text-lg"
+                : "text-white text-sm sm:text-lg hover:text-blue-400"
             }
           >
             Home
@@ -19,8 +19,8 @@ const Header = () => {
             to="/WayToSumPage"
             className={({ isActive }) =>
               isActive
-                ? "text-blue-300 underline text-lg"
-                : "text-white text-lg hover:text-blue-400"
+                ? "text-blue-300 underline text-sm sm:text-lg"
+                : "text-white text-sm sm:text-lg hover:text-blue-400"
             }
           >
             Way To Sum
@@ -29,8 +29,8 @@ const Header = () => {
             to="/FancyPage"
             className={({ isActive }) =>
               isActive
-                ? "text-blue-300 underline text-lg"
-                : "text-white text-lg hover:text-blue-400"
+                ? "text-blue-300 underline text-sm sm:text-lg"
+                : "text-white text-sm sm:text-lg hover:text-blue-400"
             }
           >
             Fancy Form
@@ -39,8 +39,8 @@ const Header = () => {
             to="/MessyReactPage"
             className={({ isActive }) =>
               isActive
-                ? "text-blue-300 underline text-lg"
-                : "text-white text-lg hover:text-blue-400"
+                ? "text-blue-300 underline text-sm sm:text-lg"
+                : "text-white text-sm sm:text-lg hover:text-blue-400"
             }
           >
            Messy React 

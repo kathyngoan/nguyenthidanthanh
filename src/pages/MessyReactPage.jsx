@@ -3,10 +3,10 @@ import CodeBlockThreeAnsweComponent from "@/components/CodeBlockThreeAnsweCompon
 
 const MessyReactPage = () => {
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto md:p-6">
 
       <div className="mx-auto">
-        <div className="grid sm:grid-cols-2 gap-2 bg-black text-white">
+        <div className="grid sm:grid-cols-2 gap-2 sm:bg-black text-white">
           {/* Left */}
           <div data-aos="fade-in">
             <CodeBlockThreeAskComponent />

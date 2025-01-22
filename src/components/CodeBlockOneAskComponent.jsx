@@ -23,7 +23,7 @@ const CodeBlockOneAskComponent = () => {
 
   return (
     <div>
-      <div className="max-w-3xl mx-auto p-6">
+      <div className="md:max-w-3xl mx-auto md:p-6">
         <h1 className="text-3xl font-semibold mb-4">Task</h1>
         <p className="text-lg mb-4">
           Provide 3 unique implementations of the following function in

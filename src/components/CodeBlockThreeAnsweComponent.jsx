@@ -73,7 +73,7 @@ const CodeBlockThreeAnsweComponent = () => {
 
   return (
     <div>
-      <div className="mx-6 p-6">
+      <div className="md:mx-6 md:p-6">
         <h1 className="text-3xl font-semibold mb-4">Answer</h1>
         <p className="text-lg mb-4">Refactored version of the code. View Command line to take explaining correctly how to improve.</p>
 

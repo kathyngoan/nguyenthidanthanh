@@ -25,7 +25,7 @@ const CodeBlockOneAnsweComponent = () => {
 
   return (
     <div>
-      <div className="mx-auto p-6">
+      <div className="mx-auto md:p-6">
         <h1 className="text-3xl font-semibold mb-4">Answer</h1>
         <p className="text-lg mb-4">
           Provide 3 unique implementations of the following function in

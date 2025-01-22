@@ -3,10 +3,10 @@ import CodeBlockOneAnsweComponent from "@/components/CodeBlockOneAnsweComponent"
 
 const WayToSumPage = () => {
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto md:p-6">
 
       <div className="mx-auto">
-        <div className="grid sm:grid-cols-2 gap-2 bg-black text-white rounded-lg">
+        <div className="grid sm:grid-cols-2 gap-2 sm:bg-black text-white rounded-lg">
           {/* Left */}
           <div className="overflow-hidden" data-aos="fade-in">
             <CodeBlockOneAskComponent />
